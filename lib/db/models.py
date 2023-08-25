@@ -9,4 +9,4 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
-    bmi_id = Column(Integer,)
+    bmi_id = Column(Integer)
