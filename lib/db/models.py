@@ -1,12 +1,35 @@
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import declarative_base, relationship, backref
+from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
 
 Base = declarative_base()
 
 class User(Base):
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
-    bmi_id = Column(Integer)
+    
+    bmis = relationship("Bmi", backref=backref("user"))
+
+    def __repr__(self):
+        return f'User(id={self.id}, ' + \
+            f'first_name={self.first_name}, ' + \
+            f'last_name={self.last_name})'
+    
+class Bmi(Base):
+    __tablename__ = "bmis"
+
+    id= Column(Integer, primary_key=True)
+    height = Column(Float)
+    weight = Column(Float)
+    date = Column(DateTime)
+    bmi = Column(Float)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    def __repr__(self):
+        return f'Bmi(id={self.id}, ' + \
+            f'height={self.height}, ' + \
+            f'weight={self.weight}, ' + \
+            f'date={self.date}, ' + \
+            f'bmi={self.bmi})'
