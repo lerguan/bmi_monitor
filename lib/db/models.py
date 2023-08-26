@@ -1,5 +1,5 @@
 from sqlalchemy.orm import declarative_base, relationship, backref
-from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
 
 Base = declarative_base()
 
@@ -9,6 +9,8 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
+    dob = Column(Date)
+    age = Column(Integer)
     
     bmis = relationship("Bmi", backref=backref("user"))
 
@@ -23,7 +25,7 @@ class Bmi(Base):
     id= Column(Integer, primary_key=True)
     height = Column(Float)
     weight = Column(Float)
-    date = Column(DateTime)
+    date = Column(Date)
     bmi = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))
 
