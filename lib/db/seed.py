@@ -33,7 +33,7 @@ if __name__ == '__main__':
         for i in range(random.randint(1, 10)):
             height = round(random.uniform(0.3, 9), 2)
             weight = round(random.uniform(3, 1000), 2)
-            bmi_value = weight/(height**2)
+            bmi_value = round(weight/(height**2), 2)
             age = date.today().year - user.dob.year
             bmi = Bmi(
                 height = height,
