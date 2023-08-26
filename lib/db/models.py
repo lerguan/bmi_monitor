@@ -10,7 +10,6 @@ class User(Base):
     first_name = Column(String)
     last_name = Column(String)
     dob = Column(Date)
-    age = Column(Integer)
     
     bmis = relationship("Bmi", backref=backref("user"))
 
@@ -25,7 +24,7 @@ class Bmi(Base):
     id= Column(Integer, primary_key=True)
     height = Column(Float)
     weight = Column(Float)
-    date = Column(Date)
+    age = Column(Integer)
     bmi = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))
 
