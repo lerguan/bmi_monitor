@@ -72,7 +72,7 @@ class Bmi(Base):
         if age1 > age2:
             age_min = age2
             age_max = age1
-        bmi_query = session.query(cls).filter(cls.user_id == user.id, age_min <=cls.age, cls.age <= age_max ).order_by(desc(cls.age)).all()
+        bmi_query = session.query(cls.age, cls.bmi).filter(cls.user_id == user.id, age_min <=cls.age, cls.age <= age_max ).order_by(desc(cls.age)).all()
         return bmi_query
     
     def __repr__(self):
