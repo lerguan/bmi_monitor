@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-
-from models import User, Bmi
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from models import User, Bmi
 from faker import Faker
 import random
 from datetime import date

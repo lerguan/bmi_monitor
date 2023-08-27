@@ -1,9 +1,12 @@
-from sqlalchemy.orm import declarative_base, relationship, backref
-from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey, desc
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship, backref
+from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey, desc, create_engine
 from datetime import date
-from .session import session
+
 
 Base = declarative_base()
+engine = create_engine("sqlite:///db/bmi_monitor.db")
+Session = sessionmaker(bind=engine)
+session = Session()
 
 class User(Base):
     __tablename__ = "users"
