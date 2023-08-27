@@ -62,12 +62,22 @@ class Bmi(Base):
 
     @classmethod
     def last_bmi(cls, user):
-        bmi_query = session.query(cls.bmi).filter(cls.user_id == user.id).order_by(desc(cls.age)).first()
+        bmi_query = session.query(cls.bmi).filter(cls.user_id == user.id, cls.age ).order_by(desc(cls.age)).first()
         return bmi_query[0]
 
+    @classmethod
+    def bmi_list(cls, user, age1, age2):
+        age_min = age1
+        age_max = age2
+        if age1 > age2:
+            age_min = age2
+            age_max = age1
+        bmi_query = session.query(cls).filter(cls.user_id == user.id, age_min <=cls.age, cls.age <= age_max ).order_by(desc(cls.age)).all()
+        return bmi_query
+    
     def __repr__(self):
         return f'Bmi(id={self.id}, ' + \
             f'height={self.height}, ' + \
             f'weight={self.weight}, ' + \
-            f'date={self.date}, ' + \
+            f'age={self.age}, ' + \
             f'bmi={self.bmi})'

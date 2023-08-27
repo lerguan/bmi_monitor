@@ -67,7 +67,7 @@ class Cli():
             self.current_user_menu(user)
 
         elif options[menu_entry_index] == "Check BMI":
-            options = ["Most Recent BMI", "List of BMI in time period", "Back", "Exit"]
+            options = ["Most Recent BMI", "List of BMI in Age Range", "Back", "Exit"]
             terminal_menu = TerminalMenu(options)
             menu_entry_index = terminal_menu.show()
 
@@ -87,15 +87,10 @@ class Cli():
 
     def handle_bmi_list(self, user):
         print("Please enter age range.")
-        age1 = input("Please enter first age: ")
-        age2 = input("Please enter second age: ")
-
-        if isinstance(age1, int) & isinstance(age2, int):
-            pass
-
-        else:
-            print("Please enter integer")
-            self.handle_bmi_list(user)
+        age1 = int(input("Please enter first age: "))
+        age2 = int(input("Please enter second age: "))
+        bmi_list = bmi.bmi_list(user, age1, age2)
+        print(bmi_list)
 
     def back_to_main_menu(self, user):
         options = ["Back to main menu"]
