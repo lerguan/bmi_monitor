@@ -75,8 +75,8 @@ class Cli():
                 self.handle_most_recent_bmi(user)
                 self.back_to_main_menu(user)
 
-            elif options[menu_entry_index] == "List of BMI in time period":
-                self.handle_bmi_list()
+            elif options[menu_entry_index] == "List of BMI in Age Range":
+                self.handle_bmi_list(user)
                 self.back_to_main_menu(user)
             elif options[menu_entry_index] == "Back":
                 self.current_user_menu(user)
@@ -84,6 +84,18 @@ class Cli():
     def handle_most_recent_bmi(self, user):
         bmi_value = bmi.last_bmi(user)
         print(f"Your most recent BMI is: {bmi_value}")
+
+    def handle_bmi_list(self, user):
+        print("Please enter age range.")
+        age1 = input("Please enter first age: ")
+        age2 = input("Please enter second age: ")
+
+        if isinstance(age1, int) & isinstance(age2, int):
+            pass
+
+        else:
+            print("Please enter integer")
+            self.handle_bmi_list(user)
 
     def back_to_main_menu(self, user):
         options = ["Back to main menu"]

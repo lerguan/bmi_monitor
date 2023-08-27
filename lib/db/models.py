@@ -62,8 +62,8 @@ class Bmi(Base):
 
     @classmethod
     def last_bmi(cls, user):
-        bmi_value = session.query(cls.bmi).filter(cls.user_id == user.id).order_by(desc(cls.age)).all()
-        return bmi_value
+        bmi_query = session.query(cls.bmi).filter(cls.user_id == user.id).order_by(desc(cls.age)).first()
+        return bmi_query[0]
 
     def __repr__(self):
         return f'Bmi(id={self.id}, ' + \
