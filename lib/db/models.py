@@ -20,6 +20,15 @@ class User(Base):
         user = session.query(cls).filter(cls.first_name == first_name, cls.last_name == last_name).first()
         if user:
             return user
+    @classmethod
+    def create(cls, first_name, last_name, dob):
+        user = cls(
+            first_name=first_name,
+            last_name=last_name,
+            dob=dob
+        )
+        session.add(user)
+        session.commit()
 
     def __repr__(self):
         return f'User(id={self.id}, ' + \
