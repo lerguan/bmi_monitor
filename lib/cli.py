@@ -82,8 +82,8 @@ class Cli():
                 self.current_user_menu(user)
 
     def handle_most_recent_bmi(self, user):
-        print("Your most recent BMI is: ")
-        bmi.last_bmi(user)
+        bmi_value = bmi.last_bmi(user)
+        print(f"Your most recent BMI is: {bmi_value}")
 
     def back_to_main_menu(self, user):
         options = ["Back to main menu"]

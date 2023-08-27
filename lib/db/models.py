@@ -47,7 +47,7 @@ class Bmi(Base):
 
 
     @classmethod
-    def update_info(cls, user, height, weight):
+    def update_info(cls, user, weight, height):
         bmi_value = round(weight/(height**2), 2)
         age = date.today().year - user.dob.year
         user_bmi = cls(
@@ -62,7 +62,7 @@ class Bmi(Base):
 
     @classmethod
     def last_bmi(cls, user):
-        bmi_value = session.query(cls.bmi).filter(cls.user_id == user.id).order_by(desc(cls.age)).first()
+        bmi_value = session.query(cls.bmi).filter(cls.user_id == user.id).order_by(desc(cls.age)).all()
         return bmi_value
 
     def __repr__(self):
