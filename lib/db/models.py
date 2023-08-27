@@ -1,5 +1,6 @@
 from sqlalchemy.orm import declarative_base, relationship, backref
 from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
+from datetime import date
 from .session import session
 
 Base = declarative_base()
@@ -38,6 +39,21 @@ class Bmi(Base):
     age = Column(Integer)
     bmi = Column(Float)
     user_id = Column(Integer, ForeignKey("users.id"))
+
+
+    @classmethod
+    def update_info(cls, user, height, weight):
+        bmi_value = round(weight/(height**2), 2)
+        age = date.today().year - user.dob.year
+        user_bmi = cls(
+            height=height,
+            weight=weight,
+            age=age,
+            bmi=bmi_value,
+            user_id=user.id
+        )
+        session.add(user_bmi)
+        session.commit()
 
     def __repr__(self):
         return f'Bmi(id={self.id}, ' + \
