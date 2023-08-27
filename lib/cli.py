@@ -18,6 +18,9 @@ class Cli():
         print("Please enter your name")
         first_name = input("First Name: ")
         last_name = input("Last Name: ")
+        self.handle_current_user(first_name, last_name)
+
+    def handle_current_user(self, first_name, last_name):   
         current_user = user.find(first_name, last_name)
 
         if current_user:
@@ -32,6 +35,7 @@ class Cli():
             if options[menu_entry_index] == "Yes":
                 print(f"Welcome, {first_name} {last_name}!")
                 self.handle_dob_input(first_name, last_name)
+                self.current_user_menu(current_user)
 
     def handle_dob_input(self, first_name, last_name):
         dob_input = input("Please enter your date of birth (yyyy-mm-dd): ")
@@ -44,6 +48,7 @@ class Cli():
         if res:
             dob = datetime.strptime(dob_input, date_format)
             user.create(first_name, last_name, dob)
+            self.handle_current_user(first_name, last_name)
 
         else:
             print("Please enter valid date of birth")
