@@ -1,5 +1,5 @@
 from sqlalchemy.orm import declarative_base, relationship, backref
-from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey, desc
 from datetime import date
 from .session import session
 
@@ -59,6 +59,11 @@ class Bmi(Base):
         )
         session.add(user_bmi)
         session.commit()
+
+    @classmethod
+    def last_bmi(cls, user):
+        bmi_value = session.query(cls.bmi).filter(cls.user_id == user.id).order_by(desc(cls.age)).first()
+        return bmi_value
 
     def __repr__(self):
         return f'Bmi(id={self.id}, ' + \

@@ -72,12 +72,25 @@ class Cli():
             menu_entry_index = terminal_menu.show()
 
             if options[menu_entry_index] == "Most Recent BMI":
-                self.handle_most_recent_bmi()
+                self.handle_most_recent_bmi(user)
+                self.back_to_main_menu(user)
+
             elif options[menu_entry_index] == "List of BMI in time period":
                 self.handle_bmi_list()
+                self.back_to_main_menu(user)
             elif options[menu_entry_index] == "Back":
                 self.current_user_menu(user)
 
+    def handle_most_recent_bmi(self, user):
+        print("Your most recent BMI is: ")
+        bmi.last_bmi(user)
+
+    def back_to_main_menu(self, user):
+        options = ["Back to main menu"]
+        terminal_menu = TerminalMenu(options)
+        menu_entry_index = terminal_menu.show()
+        if options:
+            self.current_user_menu(user)
 
 app = Cli()
 app.start()
