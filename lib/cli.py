@@ -2,7 +2,7 @@
 from helpers.banner import Banner
 from simple_term_menu import TerminalMenu
 from db.models import User, Bmi
-from datetime import date
+from datetime import datetime
 import ipdb
 
 banner=Banner()
@@ -30,21 +30,23 @@ class Cli():
             menu_entry_index = terminal_menu.show()
             
             if options[menu_entry_index] == "Yes":
-                print(f"Welcom, {first_name} {last_name}!")
-                dob_input = input("Please enter your date of birth (yyyy-mm-dd): ")
-                date_format = "%Y-%m-%d"
-                res = True
-                try:
-                    res = bool(date.strptime(dob_input, date_format))
-                except ValueError:
-                    res = False
-                if res:
-                    dob = date.strftime(dob_input, date_format)
-                    user.create_user(first_name, last_name, dob)
-                else:
-                    print("Please enter valid date of birth")
-            
-            
+                print(f"Welcome, {first_name} {last_name}!")
+                self.handle_dob_input(first_name, last_name)
+
+    def handle_dob_input(self, first_name, last_name):
+        dob_input = input("Please enter your date of birth (yyyy-mm-dd): ")
+        date_format = "%Y-%m-%d"
+        res = True
+        try:
+            res = bool(datetime.strptime(dob_input, date_format))
+        except ValueError:
+            res = False
+        if res:
+            dob = datetime.strftime(dob_input, date_format)
+            user.create(first_name, last_name, dob)
+        else:
+            print("Please enter valid date of birth")
+            self.handle_dob_input(first_name, last_name)
 
     def current_user_menu(self, user):
         print(f"Welcome, {user.first_name} {user.last_name}!")
