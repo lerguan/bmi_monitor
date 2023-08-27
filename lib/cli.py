@@ -17,7 +17,7 @@ class Cli():
         print("Please enter your name")
         first_name = input("First Name: ")
         last_name = input("Last Name: ")
-        current_user = user.find_or_create_by(first_name, last_name)
+        current_user = user.find(first_name, last_name)
 
         if current_user:
             self.current_user_menu(current_user)
@@ -29,11 +29,9 @@ class Cli():
             menu_entry_index = terminal_menu.show()
             
             if options[menu_entry_index] == "Yes":
-                options = ["", "No"]
-                terminal_menu = TerminalMenu(options)
-                menu_entry_index = terminal_menu.show()
-                self.new_user_menu(first_name, last_name)
-
+                print(f"Welcom, {first_name} {last_name}!")
+                input("Please enter your date of birth (yyyy-mm-dd): ")
+            
             
 
     def current_user_menu(self, user):

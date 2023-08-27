@@ -16,14 +16,10 @@ class User(Base):
     bmis = relationship("Bmi", backref=backref("user"))
 
     @classmethod
-    def find_or_create_by(cls, first_name, last_name):
+    def find(cls, first_name, last_name):
         user = session.query(cls).filter(cls.first_name == first_name, cls.last_name == last_name).first()
-
         if user:
             return user
-        else:
-            print('invalid')
-
 
     def __repr__(self):
         return f'User(id={self.id}, ' + \
