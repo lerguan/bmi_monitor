@@ -90,7 +90,9 @@ class Cli():
         age1 = int(input("Please enter first age: "))
         age2 = int(input("Please enter second age: "))
         bmi_list = bmi.bmi_list(user, age1, age2)
-        print(bmi_list)
+        print("|" + " Age " + "|" + "   BMI   " + "|")
+        for item in bmi_list:
+            print("|" + f" {item[0]}  " + "|" + f"   {item[1]}  " + "|" + "\n")
 
     def back_to_main_menu(self, user):
         options = ["Back to main menu"]
