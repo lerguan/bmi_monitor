@@ -16,9 +16,9 @@ class Cli():
     def start(self):
         banner.welcome()
         print("Please enter your name")
-        first_name = input("First Name: ")
-        last_name = input("Last Name: ")
-        self.handle_current_user(first_name, last_name)
+        first_name_input = input("First Name: ")
+        last_name_input = input("Last Name: ")
+        self.handle_current_user(first_name_input, last_name_input)
 
     def handle_current_user(self, first_name, last_name):   
         current_user = user.find(first_name, last_name)
@@ -35,7 +35,7 @@ class Cli():
             if options[menu_entry_index] == "Yes":
                 print(f"Welcome, {first_name} {last_name}!")
                 self.handle_dob_input(first_name, last_name)
-                self.current_user_menu(current_user)
+                self.handle_current_user(first_name, last_name)
 
     def handle_dob_input(self, first_name, last_name):
         dob_input = input("Please enter your date of birth (yyyy-mm-dd): ")
@@ -67,7 +67,10 @@ class Cli():
             self.current_user_menu(user)
 
         elif options[menu_entry_index] == "Check BMI":
-            pass
+            options = ["Most Recent BMI", "List of BMI in time period", "Back", "Exit"]
+            terminal_menu = TerminalMenu(options)
+            menu_entry_index = terminal_menu.show()
+
 
 app = Cli()
 app.start()
