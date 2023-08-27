@@ -27,3 +27,5 @@ The main menu has three options, including `Input New height and weight`, `check
 In this submenu, user can input their recent height and weight to update their info. Their age and bmi will be automatically updated in the database.
 
 ### Check BMI submenu
+
+In this submenu, user can check their most recent BMI. Also, user can check the list of their BMIs in a specific age range.
