@@ -2,6 +2,7 @@
 from helpers.banner import Banner
 from simple_term_menu import TerminalMenu
 from db.models import User, Bmi
+from datetime import date
 import ipdb
 
 banner=Banner()
@@ -22,7 +23,7 @@ class Cli():
         if current_user:
             self.current_user_menu(current_user)
         else:
-            print("NO user is found! Do you want to create new user profile?")
+            print("User is not found! Do you want to create new user profile?")
             
             options = ["Yes", "No"]
             terminal_menu = TerminalMenu(options)
@@ -30,7 +31,18 @@ class Cli():
             
             if options[menu_entry_index] == "Yes":
                 print(f"Welcom, {first_name} {last_name}!")
-                input("Please enter your date of birth (yyyy-mm-dd): ")
+                dob_input = input("Please enter your date of birth (yyyy-mm-dd): ")
+                date_format = "%Y-%m-%d"
+                res = True
+                try:
+                    res = bool(date.strptime(dob_input, date_format))
+                except ValueError:
+                    res = False
+                if res:
+                    dob = date.strftime(dob_input, date_format)
+                    user.create_user(first_name, last_name, dob)
+                else:
+                    print("Please enter valid date of birth")
             
             
 
