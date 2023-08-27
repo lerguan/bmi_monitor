@@ -1,5 +1,6 @@
 from sqlalchemy.orm import declarative_base, relationship, backref
 from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
+from .session import session
 
 Base = declarative_base()
 
@@ -12,6 +13,16 @@ class User(Base):
     dob = Column(Date)
     
     bmis = relationship("Bmi", backref=backref("user"))
+
+    @classmethod
+    def find_or_create_by(cls, first_name, last_name):
+        user = session.query(cls).filter(cls.first_name == first_name, cls.last_name == last_name).first()
+
+        if user:
+            return user
+        else:
+            print('invalid')
+
 
     def __repr__(self):
         return f'User(id={self.id}, ' + \
