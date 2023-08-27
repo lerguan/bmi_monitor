@@ -42,8 +42,9 @@ class Cli():
         except ValueError:
             res = False
         if res:
-            dob = datetime.strftime(dob_input, date_format)
+            dob = datetime.strptime(dob_input, date_format)
             user.create(first_name, last_name, dob)
+
         else:
             print("Please enter valid date of birth")
             self.handle_dob_input(first_name, last_name)
